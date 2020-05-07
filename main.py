@@ -2,7 +2,7 @@ import requests, json, time, threading
 from worldStatus import WorldStatus
 from tkinter import *
 
-class Initial:
+class Main:
     def crawling_api(self):
         response = requests.get("https://api.thevirustracker.com/free-api?global=stats")
         resp = json.loads(response.text)
@@ -40,6 +40,7 @@ class Initial:
         oldData = None
         while True:
             if(flag == False):
+                print("Fist time update")
                 time.sleep(30)
                 oldData = self.btnRefresh_command()
                 flag = True
@@ -98,7 +99,7 @@ class Initial:
         self.configWg(self.lbl_NewCase)
 
         
-        self.btnRefresh = Button(self.root, text = "Refresh !", command = self.btnRefresh_command_overried(data))
+        self.btnRefresh = Button(self.root, text = "Refresh !", command = self.btnRefresh_command)
         self.btnRefresh.grid(row = 2, column = 2)
         self.btnRefresh.config(padx = 80, pady = 10)
 
@@ -119,5 +120,5 @@ class Initial:
         self.root.mainloop()
         
 if __name__ == "__main__":
-    app = Initial()
+    app = Main()
    
