@@ -25,11 +25,11 @@ class Initial:
     
     def btnRefresh_command_overried(self, oldData):
         data = self.crawling_api()
-        self.lbl_totalCase['text'] = data.formating_Number(data.total_cases)  + " + " + str(oldData.total_cases - data.total_cases)
-        self.lbl_totalRecov['text'] = data.formating_Number(data.total_recovered) + " + " + str(oldData.total_recovered - data.total_recovered)
-        self.lbl_totalDeaths['text'] = data.formating_Number(data.total_deaths)  + " + " + str(oldData.total_deaths - data.total_deaths)
-        self.lbl_NewCase['text'] = data.formating_Number(data.total_new_cases_today)  + " + " + str(oldData.total_new_cases_today - data.total_new_cases_today)
-        self.lbl_NewCase['text'] = data.formating_Number(data.total_new_deaths_today)  + " + " + str(oldData.total_new_deaths_today - data.total_new_deaths_today)
+        self.lbl_totalCase['text'] = data.formating_Number(data.total_cases)  + " + " + str( - oldData.total_cases + data.total_cases)
+        self.lbl_totalRecov['text'] = data.formating_Number(data.total_recovered) + " + " + str( - oldData.total_recovered + data.total_recovered)
+        self.lbl_totalDeaths['text'] = data.formating_Number(data.total_deaths)  + " + " + str( - oldData.total_deaths + data.total_deaths)
+        self.lbl_NewCase['text'] = data.formating_Number(data.total_new_cases_today)  + " + " + str( - oldData.total_new_cases_today + data.total_new_cases_today)
+        self.lbl_NewCase['text'] = data.formating_Number(data.total_new_deaths_today)  + " + " + str( - oldData.total_new_deaths_today + data.total_new_deaths_today)
         self.lbl_time['text'] = data.updatedTime
         print("===> Refreshed".format(data.updatedTime))
         print(data.toString())
@@ -54,7 +54,7 @@ class Initial:
         data = self.crawling_api()
         self.root = Tk()
         self.root.title("Corona Updated Realtime!")
-        self.root.geometry("850x240")
+        self.root.geometry("880x240")
         self.root.resizable(0, 0)
 
         self.lbl1 = Label(self.root, text = "Total Cases")
@@ -97,7 +97,8 @@ class Initial:
         self.lbl_NewCase.grid(row = 1, column = 3)
         self.configWg(self.lbl_NewCase)
 
-        self.btnRefresh = Button(self.root, text = "Refresh !", command = self.btnRefresh_command)
+        
+        self.btnRefresh = Button(self.root, text = "Refresh !", command = self.btnRefresh_command_overried(data))
         self.btnRefresh.grid(row = 2, column = 2)
         self.btnRefresh.config(padx = 80, pady = 10)
 
